@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">To-Do List</string>
+    <string name="name">TASKS:</string>
+    <string name="name_task">TASK:</string>
+    <string name="new_task">Write task</string>
+    <string name="chooser">Send message via...</string>
+</resources>
