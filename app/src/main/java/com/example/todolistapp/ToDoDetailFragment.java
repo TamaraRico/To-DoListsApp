@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class ToDoDetailFragment extends Fragment {
     private static final int RESULT_OK = -1;
+//    private Uri image;
     private long taskId;
     private static final String EXTRA_TASKID = "taskId";
 
@@ -33,6 +34,7 @@ public class ToDoDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             taskId = savedInstanceState.getLong("taskId");
+//            image = Uri.parse(savedInstanceState.getString("image"));
         }
     }
 
@@ -47,6 +49,11 @@ public class ToDoDetailFragment extends Fragment {
         super.onStart();
         View view = getView();
         if(view != null){
+
+//            if(image != null) {
+//                ImageView imageFromGallery = (ImageView) view.findViewById(R.id.image);
+//                imageFromGallery.setImageURI(image);
+//            }
 
             ImageButton gallery = (ImageButton) view.findViewById(R.id.add_image_button);
             gallery.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +119,7 @@ public class ToDoDetailFragment extends Fragment {
                 cursor.close();
                 db.close();
             } catch (SQLiteException e){
-                Toast toast = Toast.makeText(getContext(), "Database unavaible", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getContext(), "Database unavailable", Toast.LENGTH_SHORT);
                 toast.show();
             }
 
@@ -130,6 +137,8 @@ public class ToDoDetailFragment extends Fragment {
                         Toast toast = Toast.makeText(getContext(), "Database unavailable", Toast.LENGTH_SHORT);
                         toast.show();
                     }
+                    Toast toast1 = Toast.makeText(getContext(), "Delete done", Toast.LENGTH_SHORT);
+                    toast1.show();
                 }
             });
         }
@@ -137,6 +146,7 @@ public class ToDoDetailFragment extends Fragment {
 
     public void onSaveInstanceState(Bundle savedInstanceState){
         savedInstanceState.putLong("taskId", taskId);
+//        savedInstanceState.putString("image", image.toString());
     }
 
     public void setTask(long id){
@@ -147,11 +157,9 @@ public class ToDoDetailFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && data != null){
-            Uri selectedImage = data.getData();
-            ImageView image = (ImageView) getView().findViewById(R.id.image);
-            image.setImageURI(selectedImage);
-            //agregar a base de datos
+            Uri image = data.getData();
+            ImageView imageView = (ImageView) getView().findViewById(R.id.image);
+            imageView.setImageURI(image);
         }
     }
-
 }

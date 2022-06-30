@@ -3,12 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/tamar/AndroidStudioProjects/ToDoListApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.129" />
+        <entry key="..\:/Users/tamar/AndroidStudioProjects/ToDoListApp/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.129" />
+        <entry key="..\:/Users/tamar/AndroidStudioProjects/ToDoListApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.129" />
         <entry key="..\:/Users/tamar/AndroidStudioProjects/ToDoListApp/app/src/main/res/layout-land/activity_main.xml" value="0.43243243243243246" />
+        <entry key="..\:/Users/tamar/AndroidStudioProjects/ToDoListApp/app/src/main/res/layout-land/fragment_list_tasks.xml" value="0.2875" />
         <entry key="..\:/Users/tamar/AndroidStudioProjects/ToDoListApp/app/src/main/res/layout-large/activity_main.xml" value="0.1859375" />
         <entry key="..\:/Users/tamar/AndroidStudioProjects/ToDoListApp/app/src/main/res/layout/activity_detail.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/tamar/AndroidStudioProjects/ToDoListApp/app/src/main/res/layout/activity_first_screen.xml" value="0.25" />
         <entry key="..\:/Users/tamar/AndroidStudioProjects/ToDoListApp/app/src/main/res/layout/activity_main.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/tamar/AndroidStudioProjects/ToDoListApp/app/src/main/res/layout/fragment_list_tasks.xml" value="0.264" />
-        <entry key="..\:/Users/tamar/AndroidStudioProjects/ToDoListApp/app/src/main/res/layout/fragment_to_do_list_detail.xml" value="0.1" />
+        <entry key="..\:/Users/tamar/AndroidStudioProjects/ToDoListApp/app/src/main/res/layout/fragment_to_do_list_detail.xml" value="0.264" />
       </map>
     </option>
   </component>

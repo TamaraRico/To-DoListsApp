@@ -107,6 +107,8 @@ public class ToDoListFragment extends Fragment {
                     }
                     updateListView();
                     taskText.getText().clear();
+                    Toast toast1 = Toast.makeText(getContext(), "Task created", Toast.LENGTH_SHORT);
+                    toast1.show();
                 }
             });
         }

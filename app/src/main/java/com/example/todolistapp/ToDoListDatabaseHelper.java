@@ -36,13 +36,13 @@ public class ToDoListDatabaseHelper extends SQLiteOpenHelper {
             db.execSQL("CREATE TABLE TASKS ("
                     + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + "TASK TEXT, "
-                    + "STATUS INTEGER);");
+                    + "STATUS INTEGER, "
+                    + "IMAGE_ID INTEGER);");
 
-            insertTask(db, "The Limb Loosener");
-            insertTask(db, "Core Agony");
-            insertTask(db, "The Wimp Special");
-            insertTask(db, "Strength and Length");
+            insertTask(db, "cook dinner");
+            insertTask(db, "Walk the dog");
+//            insertTask(db, "The Wimp Special");
+//            insertTask(db, "Strength and Length");
         }
     }
-
 }
