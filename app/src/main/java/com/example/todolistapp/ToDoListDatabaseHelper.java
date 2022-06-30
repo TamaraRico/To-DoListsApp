@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class ToDoListDatabaseHelper extends SQLiteOpenHelper {
-    private static final String DB_TITLE = "toDoTasks"; //the title of our database
-    private static final int DB_VERSION = 1; //the version of the database
+    private static final String DB_TITLE = "toDoTasks";
+    private static final int DB_VERSION = 1;
 
     ToDoListDatabaseHelper(Context context){
         super(context, DB_TITLE, null, DB_VERSION);

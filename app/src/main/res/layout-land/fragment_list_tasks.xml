@@ -5,21 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/taskTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="@string/name"
-        android:textColor="@color/black"
-        android:textSize="32sp"
-        android:layout_margin="16dp" />
-
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/taskTextView"
         android:layout_marginBottom="16dp" />
 
     <LinearLayout
