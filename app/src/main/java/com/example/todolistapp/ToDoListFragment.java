@@ -31,15 +31,16 @@ import java.util.List;
 
 public class ToDoListFragment extends Fragment {
     private SQLiteDatabase db;
+    private Listener listener;
+    private ListView listView;
     private long taskId;
+    private ArrayList<String> listTasksToDo;
+    private ArrayAdapter<String> tasksAdapter;
+//    View view;
 
     static interface Listener{
         void itemClicked(long id);
     };
-//
-    private Listener listener;
-    private ListView listView;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,14 +48,34 @@ public class ToDoListFragment extends Fragment {
         if (savedInstanceState != null) {
             taskId = savedInstanceState.getLong("taskId");
         }
+//        view = getView();
+//        listView = (ListView) view.findViewById(R.id.listView);
+//        SQLiteOpenHelper todoListDatabaseHelper = new ToDoListDatabaseHelper(getContext());
+//        try {
+//            SQLiteDatabase db = todoListDatabaseHelper.getWritableDatabase();
+//            Cursor cursor = db.query("TASKS",
+//                    new String[]{"_id", "TASK"},
+//                    null, null, null, null, null);
+//            CursorAdapter listAdapter = new SimpleCursorAdapter(getContext(),
+//                    android.R.layout.simple_list_item_1,
+//                    cursor,
+//                    new String[]{"TASK"},
+//                    new int[]{android.R.id.text1}, 0);
+//            listView.setAdapter(listAdapter);
+//        } catch (SQLiteException e) {
+//            Toast toast = Toast.makeText(getContext(), "Database unavaible", Toast.LENGTH_SHORT);
+//            toast.show();
+//        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_list_tasks, container, false);
+        View view = inflater.inflate(R.layout.fragment_list_tasks, container, false);
+        listView = (ListView) view.findViewById(R.id.listView);
+        updateListView();
+        return view;
     }
-
 
     @Override
     public void onStart() {
@@ -65,7 +86,7 @@ public class ToDoListFragment extends Fragment {
         if(view != null) {
 //            TextView title = (TextView) view.findViewById(R.id.taskTextView);
 //            title.isShown();
-             listView = (ListView) view.findViewById(R.id.listView);
+//             listView = (ListView) view.findViewById(R.id.listView);
 //        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
             Button insertButton = (Button) view.findViewById(R.id.new_task_button);
             try {
@@ -79,7 +100,7 @@ public class ToDoListFragment extends Fragment {
                         cursor,
                         new String[]{"TASK"},
                         new int[]{android.R.id.text1}, 0);
-                listView.setAdapter(listAdapter);
+//                listView.setAdapter(listAdapter);
 //            setListAdapter(listAdapter);
             } catch (SQLiteException e) {
                 Toast toast = Toast.makeText(getContext(), "Database unavaible", Toast.LENGTH_SHORT);
@@ -105,46 +126,23 @@ public class ToDoListFragment extends Fragment {
                     taskValues.put("STATUS", 0);
                     SQLiteOpenHelper todoListDatabaseHelper = new ToDoListDatabaseHelper(getContext());
                     try{
-                        SQLiteDatabase db_ = todoListDatabaseHelper.getWritableDatabase();
-                        db_.update("TASKS", taskValues, "_id = ?", new String[]{Long.toString(taskId)});
-                        db_.close();
+                        db = todoListDatabaseHelper.getWritableDatabase();
+                        db.insert("TASKS", null, taskValues);
+                        db.close();
                     } catch(SQLiteException e){
                         Toast toast = Toast.makeText(getContext(), "Database unavailable", Toast.LENGTH_SHORT);
                         toast.show();
                     }
-                    Toast db_update_done = Toast.makeText(getContext(), "database added new task", Toast.LENGTH_SHORT);
-                    db_update_done.show();
-//
-//                    TextView text = new TextView(getContext());
-//                    text.setText(taskText.getText().toString());
-//                    listView.addView(text);
+                    updateListView();
+                    taskText.getText().clear();
                 }
             });
-
-//            return super.onCreateView(inflater, container, savedInstanceState);
         }
     }
-
-//    public void addItem(View view){
-//        List<String> tasks = new ArrayList<String>();
-//        ArrayAdapter<String> adapter;
-//        EditText newTask = (EditText) view.findViewById(R.id.new_task_text);
-//        String taskText = newTask.getText().toString();
-//        if(!(taskText.equals(""))){
-//            tasks.add(taskText);
-//            adapter = new ArrayAdapter<String>(getContext(),R.id.listView, tasks);
-//            listView.setAdapter(adapter);
-//        }
-//    }
 
     public void onSaveInstanceState(Bundle savedInstanceState){
         savedInstanceState.putLong("taskId", taskId);
     }
-
-//    @Override
-//    public void onRestart(){
-//
-//    }
 
     @Override
     public void onAttach(Context context){
@@ -152,11 +150,23 @@ public class ToDoListFragment extends Fragment {
         this.listener = (Listener) context;
     }
 
-//    @Override
-//    public void onListItemClick(ListView listView, View itemView, int position, long id){
-//        if (listener != null){
-//            listener.itemClicked(id);
-//        }
-//    }
+    public void updateListView(){
+        SQLiteOpenHelper todoListDatabaseHelper = new ToDoListDatabaseHelper(getContext());
+        try {
+            db = todoListDatabaseHelper.getWritableDatabase();
+            Cursor cursor = db.query("TASKS",
+                    new String[]{"_id", "TASK"},
+                    null, null, null, null, null);
+            CursorAdapter listAdapter = new SimpleCursorAdapter(getContext(),
+                    android.R.layout.simple_list_item_1,
+                    cursor,
+                    new String[]{"TASK"},
+                    new int[]{android.R.id.text1}, 0);
+            listView.setAdapter(listAdapter);
+        } catch (SQLiteException e) {
+            Toast toast = Toast.makeText(getContext(), "Database unavaible", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
 
 }

@@ -141,14 +141,4 @@ public class ToDoDetailFragment extends Fragment {
 
     }
 
-//    public void onSendMessage(View view){
-//        CheckBox taskMessage = (CheckBox) getView().findViewById(R.id.taskDescription);
-//        String messageText = taskMessage.getText().toString();
-//        Intent intent = new Intent(Intent.ACTION_SEND);
-//        intent.setType("text/plain");
-//        intent.putExtra(Intent.EXTRA_TEXT, messageText);
-//        String chooseTitle = getString(R.string.chooser);
-//        Intent chosenIntent = Intent.createChooser(intent, chooseTitle);
-//        startActivity(chosenIntent);
-//    }
 }
