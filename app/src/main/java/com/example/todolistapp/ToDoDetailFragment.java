@@ -42,7 +42,6 @@ public class ToDoDetailFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_to_do_list_detail, container, false);
     }
 
-
     @Override
     public void onStart(){
         super.onStart();
@@ -109,8 +108,6 @@ public class ToDoDetailFragment extends Fragment {
 
                     boolean s = status == 0 ? false : true;
                     task.setChecked(s);
-//                    CheckBoxPreference description = (TextView) view.findViewById(R.id.textDescription);
-//                    description.setText(descriptionText);
                 }
                 cursor.close();
                 db.close();
@@ -118,6 +115,23 @@ public class ToDoDetailFragment extends Fragment {
                 Toast toast = Toast.makeText(getContext(), "Database unavaible", Toast.LENGTH_SHORT);
                 toast.show();
             }
+
+            ImageButton delete = (ImageButton)view.findViewById(R.id.delete_button);
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ContentValues taskValues = new ContentValues();
+                    SQLiteOpenHelper todoListDatabaseHelper = new ToDoListDatabaseHelper(getContext());
+                    try{
+                        SQLiteDatabase db = todoListDatabaseHelper.getWritableDatabase();
+                        db.delete("TASKS", "_id = ?", new String[] {String.valueOf(taskId)});
+                        db.close();
+                    } catch(SQLiteException e){
+                        Toast toast = Toast.makeText(getContext(), "Database unavailable", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                }
+            });
         }
     }
 
@@ -138,7 +152,6 @@ public class ToDoDetailFragment extends Fragment {
             image.setImageURI(selectedImage);
             //agregar a base de datos
         }
-
     }
 
 }
